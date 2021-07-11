@@ -19,6 +19,9 @@
     <PackageReference Include="CefSharp.WinForms.NETCore" Version="91.1.210" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Views\home.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

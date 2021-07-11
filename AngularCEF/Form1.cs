@@ -10,6 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp.WinForms;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AngularCEF
 {
@@ -23,13 +25,20 @@ namespace AngularCEF
         /// Cef Js/CS 溝通介面
         /// </summary>
         private CefCustomObject _cefCustomObject;
+        public IConfiguration Configuration { get; }
 
-        public Form1()
+        public Form1(IConfiguration configuration)
         {
+            Configuration = configuration;
+
+            // winform initial 
             InitializeComponent();
+
+            // CEF Sharp Initial
             string filePath = Directory.GetCurrentDirectory() + "/Views/home.html";
-            string angularPath = "http://localhost:5050";
-            this._browser = new ChromiumWebBrowser (angularPath);
+            // string angularPath = "http://localhost:5050";
+            string applicationUrl = Configuration.GetValue<string>("ApplicationUrl");
+            this._browser = new ChromiumWebBrowser (applicationUrl);
             this.Controls.Add (this._browser);
 
             // Cef js/cs 溝通介面註冊

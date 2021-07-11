@@ -10,9 +10,11 @@ using CefSharp;
 using CefSharp.WinForms;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace AngularCEF {
     static class Program {
+        public static IConfiguration Configuration;
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -24,24 +26,19 @@ namespace AngularCEF {
 
             CreateWebHostBuilder (args).Build ().RunAsync ();
 
+            var builder = new ConfigurationBuilder()
+            .AddJsonFile($"appsettings.json", optional: true, reloadOnChange: true);
+            Configuration = builder.Build();
+
             Application.SetHighDpiMode (HighDpiMode.SystemAware);
             Application.EnableVisualStyles ();
             Application.SetCompatibleTextRenderingDefault (false);
-            Application.Run (new Form1 ());
+            Application.Run (new Form1 (Configuration));
 
         }
         public static IWebHostBuilder CreateWebHostBuilder (string[] args) =>
             WebHost.CreateDefaultBuilder (args)
-            .UseStartup<Startup> ().UseKestrel (options => {
-
-                // HTTP 5000
-                options.ListenLocalhost (5050);
-
-                // HTTPS 5001
-                options.ListenLocalhost (5051, builder => {
-                    builder.UseHttps ();
-                });
-            });
+            .UseStartup<Startup> ();
 
     }
 }
