@@ -7,20 +7,35 @@
 程式執行步驟
 1. dotent core 3.1 sdk 安裝 https://dotnet.microsoft.com/download/dotnet/3.1
 2. angular cli 安裝 https://angular.tw/cli
-vscode 注意
-  launch.json 範例(注意相對路徑) >
-      {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/AngularCEF/bin/Debug/netcoreapp3.1/win-x64/AngularCEF.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/BeaverKiosk2",
-            "console": "internalConsole",
-            "stopAtEntry": false,
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-                // "ASPNETCORE_ENVIRONMENT": "Release"
-              }
-        }
+3. vscode 注意
+  1. launch.json 範例(注意相對路徑)
+  ```
+{
+
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/AngularCEF/bin/Debug/netcoreapp3.1/win-x64/AngularCEF.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/AngularCEF",
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+        // "ASPNETCORE_ENVIRONMENT": "Release"
+      }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    }
+  ]
+}
+
+  ```
+      
